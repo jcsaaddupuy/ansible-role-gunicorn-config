@@ -10,7 +10,7 @@ None
 
 Role Variables
 --------------
-Variables with default values ( selfexplanatory ) :
+Variables with default values ( self-explanatory ) :
 
     gunicorn_conf_output_file: '/tmp/gunicorn.py'
 
@@ -36,11 +36,42 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Assuming you have a variable 'app_name' with value 'myapp' :
 
     - hosts: servers
+      vars:
+          - gunicorn_conf_user: "{{app_name}}"
+          - gunicorn_conf_output_file: '/tmp/{{app_name}}-gunicorn.py'
+
+          - gunicorn_conf_bind: '127.0.0.1'
+          - gunicorn_conf_workers: 'multiprocessing.cpu_count() * 2 + 1'
+          - gunicorn_conf_logfile: '/var/log/{{app_name}}-gunicorn.log'
+          - gunicorn_conf_loglevel: 'info'
+
+          - gunicorn_conf_pidfile: '/tmp/{{app_name}}-gunicorn.pid'
+
+          - gunicorn_conf_daemon: 'False'
+          - gunicorn_conf_debug: 'False'
+          - gunicorn_conf_timeout: '200'
       roles:
-         - { role: jcsaaddupuy.gunicorn_config, x: 42 }
+         - role: jcsaaddupuy.gunicorn_config
+
+Will generate the following file in /tmp/myapp-gunicorn.py :
+
+    import multiprocessing
+
+    bind = "127.0.0.1"
+    workers = multiprocessing.cpu_count() * 2 + 1
+    user = 'myapp'
+    logfile = "/var/log/myapp-gunicorn.log"
+    loglevel = "info"
+    pidfile = '/tmp/myapp-gunicorn.pid'
+    daemon = False
+    debug = False
+    timeout = 200
+
+
+
 
 License
 -------
@@ -49,5 +80,6 @@ BSD
 
 Author Information
 ------------------
+Missing config key ? please make a PR :)
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[github/jcsaaddupuy](https://github.com/jcsaaddupuy/)
