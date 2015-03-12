@@ -1,9 +1,9 @@
 ---
+gunicorn_conf_user: 'root'
 gunicorn_conf_output_file: '/tmp/gunicorn.py'
 
 gunicorn_conf_bind: '127.0.0.1'
 gunicorn_conf_workers: 'multiprocessing.cpu_count() * 2 + 1'
-gunicorn_conf_user: {{ remote_user }}
 #
 gunicorn_conf_logfile: '/var/log/gunicorn.log'
 gunicorn_conf_loglevel: 'info'
