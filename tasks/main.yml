@@ -1,4 +1,3 @@
 - name: Setup Gunicorn config
   template: src=gunicorn.conf.py.j2
           dest={{ gunicorn_conf_output_file }}
-  notify: restart supervisor
