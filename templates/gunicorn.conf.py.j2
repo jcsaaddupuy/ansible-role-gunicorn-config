@@ -1,0 +1,15 @@
+import multiprocessing
+
+bind = "{{ gunicorn_conf_bind }}"
+workers = {{ gunicorn_conf_workers }}
+
+user = '{{ gunicorn_conf_user }}'
+
+logfile = "{{ gunicorn_conf_logfile }}"
+loglevel = "{{gunicorn_conf_loglevel}}"
+
+pidfile = '{{ gunicorn_conf_pidfile }}'
+
+daemon = {{gunicorn_conf_daemon}}
+debug = {{ gunicorn_conf_debug }}
+timeout = {{ gunicorn_conf_timeout }}
